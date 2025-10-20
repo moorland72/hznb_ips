@@ -1,0 +1,29 @@
+name: hznb_ips
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  hive: ^2.2.3
+  drop_down_list: ^2.0.0
+  choice: ^2.3.2
+  font_awesome_flutter: ^10.10.0
+  flutter_holo_date_picker: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - images/datenbank_hinzu.png
+    - images/hznb_logo_klein.png
