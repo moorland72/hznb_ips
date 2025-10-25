@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hznb_ips/data/widgets.dart';
-import 'package:hznb_ips/data/listen.dart';
 
 class SeventhWindow extends StatelessWidget {
   const SeventhWindow({super.key});
@@ -25,10 +24,7 @@ class SeventhWindow extends StatelessWidget {
             ),
             Row(
               children: [
-                SegmentedButtonChoice(
-                  Key('RehaEinleitung'),
-                  
-                ),
+
               ],
             ),
 

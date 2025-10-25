@@ -1,12 +1,12 @@
 import 'package:drop_down_list/model/selected_list_item.dart';
 
-const List<String> stations = [
+final List<String> stations = <String>[
   'IPS, Herz-Neuro-Zentrum Münsterlingen',
   'IMC, Herz-Neuro-Zentrum Münsterlingen',
   'PS, Herz-Neuro-Zentrum Münsterlingen',
 ];
 
-const List<String> treatmentTypes = [
+final List<String> treatmentTypes =<String>[
   'Alten- oder Pflegeheim',
   'Kurzzeitpflege',
   'anderes Krankenhaus',
@@ -14,13 +14,13 @@ const List<String> treatmentTypes = [
   'Sonstige',
 ];
 
-const List<String> sozialeAspekte = [
+final List<String> sozialeAspekte = <String>[
   'Alleinstehend',
   'Gesetzlicher Betreuer',
   'Betreuung durch Angehörige',
 ];
 
-const List<String> previousCare = [
+final List<String> previousCare = <String>[
   'Selbständig',
   'Angehörige',
   'Spitex',
@@ -30,7 +30,7 @@ const List<String> previousCare = [
   'Therapie',
 ];
 
-final List<String> bewustseinOptions = [
+final List<String> bewustseinOptions = <String>[
   'wach, kooperativ',
   'ansprechbar',
   'kooperativ teilweise',
@@ -39,7 +39,7 @@ final List<String> bewustseinOptions = [
   'sediert',
 ];
 
-final List<String> verhaltnisOptions = [
+final List<String> verhaltnisOptions = <String>[
   'unauffällig',
   'unkooperativ',
   'enthemmt',
@@ -47,14 +47,14 @@ final List<String> verhaltnisOptions = [
   'depressiv',
 ];
 
-final List<String> verstandnisOptions = [
+final List<String> verstandnisOptions = <String>[
   'gut',
   'eingeschränkt',
   'keine',
   'spricht stimmlos',
 ];
 
-final List<String> spracheOptions = [
+final List<String> spracheOptions = <String>[
   'fehlerfrei',
   'eingeschränkt',
   'keine',
@@ -62,7 +62,7 @@ final List<String> spracheOptions = [
   'nicht beurteilbar',
 ];
 
-final List<String> gehoerOptions = [
+final List<String> gehoerOptions =  <String>[
   'reagiert normal',
   'reagiert auf Zuruf',
   'nicht beurteilbar',
@@ -70,7 +70,7 @@ final List<String> gehoerOptions = [
   'Hörgerät',
 ];
 
-final List<String> sehenOptions = [
+final List<String> sehenOptions = <String>[
   'unauffällig',
   'eingeschränkt',
   'fixiert zeitweise',
@@ -78,7 +78,7 @@ final List<String> sehenOptions = [
   'nicht beurteilbar',
 ];
 
-final List<String> mobilitaetOptions = [
+final List<String> mobilitaetOptions = <String>[
   'selbständig',
   'mit Anleitung',
   'Teilübernahme',
@@ -86,7 +86,7 @@ final List<String> mobilitaetOptions = [
   'nicht möglich',
 ];
 
-final List<String> mobilMitHilfsMittel = [
+final List<String> mobilMitHilfsMittel = <String>[
   'selbständig',
   'mit Anleitung',
   'mit Hilfsmittel',
@@ -94,7 +94,7 @@ final List<String> mobilMitHilfsMittel = [
   'nicht möglich',
 ];
 
-final List<String> essenOptions = [
+final List<String> essenOptions = <String>[
   'selbständig',
   'mit Anleitung',
   'Teilübernahme',
@@ -102,39 +102,63 @@ final List<String> essenOptions = [
   'mundgerechte Zubereitung',
 ];
 
-final List<String> trinkenOptions = [
+final List<String> trinkenOptions = <String>[
   'selbständig',
   'anhalten zu trinken',
   'andicken',
 ];
 
-final List<String> stomaVersorgung = [
+final List<String> stomaVersorgung = <String>[
   '',
   'selbständig',
   'mit Hilfe',
   'Vollübernahme',
 ];
 
-final List<String> insulinVerabreichung = ['Insulinpumpe', 'Pen', 'Spritze'];
+final List<String> injektionHilfe = <String>[
+  'selbstständig',
+  'mit Unterstützung',
+  'vollständig Übernahme',
+];
 
-final List<String> sondenArt = ['Magensonde', 'PEG-Sonde', 'PEJ-Sonde'];
+final List<String> insulinVerabreichung = <String>['Insulinpumpe', 'Pen', 'Spritze'];
 
-final List<String> korperPflegeOrt = ['', 'Bett', 'Bad', 'Washbecken'];
+final List<String> sondenArt = <String>['','Magensonde', 'PEG-Sonde', 'PEJ-Sonde'];
 
-final List<String> optionChoices = [];
+final List<String> korperPflegeOrtOption = <String> ['Bett', 'Bad', 'Washbecken'];
+
+final List<String> optionChoices = <String>[];
 
 String? selectedValueUnterlagen;
 
 final isSelected = <bool>[false, false, false];
 
 // ignore: camel_case_types
-enum wahlOptions { ja, nein }
+enum TwoWahlOptions { ja, nein }
 
-final List<SelectedListItem<String>> medikamentEinnahme = [
-  SelectedListItem(data: 'selbstständig'),
-  SelectedListItem(data: 'Überwachung der Einnahme'),
-  SelectedListItem(data: 'Tabletten mörsern'),
+enum ThreeWahlOptions { ja, nein, nichtbekannt }
+
+final List<String> medikamentEinnahme = <String>[
+  '',
+  'selbstständig',
+  'Überwachung der Einnahme',
 ];
+
+final Map<String, bool> atmungListeOption = {
+  'problemlose Atmung': false,
+  'Raucher': false,
+  'Atemnot bei Belastung': false,
+  'Atemnot in Ruhe': false,
+};
+
+final Map<String, bool> schlafListeOption = {
+  'ungestörter Schlaf': false,
+  'Schlafstörungen': false,
+  'nächtliche Unruhe': false,
+  'Schlafapnoe': false,
+  'CPAP-Gerät': false,
+  'Tag-/Nachtrhythmus gestört': false,
+};
 
 final List<SelectedListItem<String>> atmungListe = [
   SelectedListItem<String>(data: 'problemlos'),
@@ -152,6 +176,39 @@ final List<SelectedListItem<String>> schlafListe = [
   SelectedListItem<String>(data: 'Tag-/Nachtrhythmus gestört'),
 ];
 
+final Map<String, bool> mitgegebeneUnterlagen = {
+  'Entlassungsbericht (Arztbrief)': false,
+  'Medikationsplan': false,
+  'Schrittmacher/ ICD pass': false,
+  'Antikoagulationspass': false,
+  'Allergiepass': false,
+  'Foto-/Wunddokumentation': false,
+  'Insulinplan': false,
+  'Sanierungsplan': false,
+  'Röntgenbilder': false,
+  'Laborwerte': false,
+  'Wertsachen ': false,
+  'EKG': false,
+};
+
+final Map<String, bool> personlicheHilfsmittel = {
+  'Gehstock': false,
+  'Gehhilfe': false,
+  'Unterarmgehstützen': false,
+  'Rollator': false,
+  'Rollstuhl': false,
+  'Brille': false,
+  'Hörgerät': false,
+  'Prothese': false,
+  'Inkontinenzmaterial': false,
+};
+
+final Map<String, bool> besonderheitenListe = {
+  'Portkatheter': false,
+  'Antikoagulation': false,
+  'Schrittmacher/ICD': false,
+};
+
 final List<SelectedListItem<String>> unterlagenMitgegeben = [
   SelectedListItem<String>(data: 'Entlassungsbericht (Arztbrief)'),
   SelectedListItem<String>(data: 'Medikationsplan'),
@@ -167,7 +224,7 @@ final List<SelectedListItem<String>> unterlagenMitgegeben = [
   SelectedListItem<String>(data: 'EKG', isSelected: false),
 ];
 
-final List<SelectedListItem<String>> personlicheHilfsmittel = [
+ final List<SelectedListItem<String>> personlicheHilfsmittel2 = [
   SelectedListItem<String>(data: 'Gehstock'),
   SelectedListItem<String>(data: 'Gehhilfe'),
   SelectedListItem<String>(data: 'Unterarmgehstützen'),
@@ -177,15 +234,15 @@ final List<SelectedListItem<String>> personlicheHilfsmittel = [
   SelectedListItem<String>(data: 'Hörgerät'),
   SelectedListItem<String>(data: 'Prothese'),
   SelectedListItem<String>(data: 'Inkontinenzmaterial'),
-];
+]; 
 
-final List<SelectedListItem<String>> besonderheitenListe = [
+final List<SelectedListItem<String>> besonderheitenListe2 = [
   SelectedListItem<String>(data: 'Portkatheter'),
   SelectedListItem<String>(data: 'Antikoagulation'),
   SelectedListItem<String>(data: 'Schrittmacher/ICD'),
 ];
 
-const List<String> pflegeStufen = [
+final List<String> pflegeStufen = <String>[
   'keine',
   'PS 1 : < 20 Minuten Pflegeaufwand pro Tag',
   'PS 2 : 20 - 40 Minuten Pflegeaufwand pro Tag',

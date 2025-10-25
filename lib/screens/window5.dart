@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hznb_ips/data/unterlagen.dart';
 import 'package:hznb_ips/data/widgets.dart';
 import 'package:hznb_ips/data/listen.dart';
+import 'package:hznb_ips/screens/selected_unterlagen_string.dart';
 
-class FifthWindow extends StatelessWidget {
+class FifthWindow extends StatefulWidget {
   const FifthWindow({super.key});
 
+  @override
+  State<FifthWindow> createState() => _FifthWindowState();
+}
+
+class _FifthWindowState extends State<FifthWindow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +26,7 @@ class FifthWindow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              //Kopfzeile mit Logo
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5.0),
@@ -28,6 +36,7 @@ class FifthWindow extends StatelessWidget {
             ),
             Divider(color: Colors.grey, thickness: 1),
             Row(
+              //Körperpflege/ Kleidung
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5.0),
@@ -39,6 +48,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Waschen
               children: [
                 Column(
                   children: [
@@ -50,14 +60,29 @@ class FifthWindow extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'Waschen',
-                          mobilitaetOptions,
+                    SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          key: Key('Waschen'),
+                          items: mobilitaetOptions.map((String mobilitaet) {
+                            return DropdownMenuItem(
+                              value: mobilitaet,
+                              child: Text(mobilitaet),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              waschenController.text = value.toString();
+                              unterlagen['waschen'] = '$value\n';
+                            });
+                          },
+                          value: waschenController.text.isEmpty
+                              ? null
+                              : waschenController.text,
+                          hint: Text('Waschen'),
+                          isExpanded: true,
                         ),
                       ),
                     ),
@@ -65,14 +90,30 @@ class FifthWindow extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'Waschen',
-                          korperPflegeOrt,
+                    SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          items: korperPflegeOrtOption.map((
+                            String korperPflegeOrt,
+                          ) {
+                            return DropdownMenuItem(
+                              value: korperPflegeOrt,
+                              child: Text(korperPflegeOrt),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              waschenOrtController.text = value.toString();
+                              unterlagen['WaschenOrt'] = '$value\n';
+                            });
+                          },
+                          value: waschenOrtController.text.isEmpty
+                              ? null
+                              : waschenOrtController.text,
+                          hint: Text('waschen Wo?'),
+                          isExpanded: true,
                         ),
                       ),
                     ),
@@ -81,6 +122,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Mundpflege
               children: [
                 Column(
                   children: [
@@ -98,11 +140,28 @@ class FifthWindow extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'Mundpflege',
-                          mobilitaetOptions,
+                        width: 200,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButton(
+                            items: mobilitaetOptions.map((String mobilitaet) {
+                              return DropdownMenuItem(
+                                value: mobilitaet,
+                                child: Text(mobilitaet),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                mundPflegeController.text = value.toString();
+                                unterlagen['Mundpflege'] = '$value\n';
+                              });
+                            },
+                            value: mundPflegeController.text.isEmpty
+                                ? null
+                                : mundPflegeController.text,
+                            hint: Text('Mundpflege'),
+                            isExpanded: true,
+                          ),
                         ),
                       ),
                     ),
@@ -110,14 +169,30 @@ class FifthWindow extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'Mundpflege',
-                          korperPflegeOrt,
+                    SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          items: korperPflegeOrtOption.map((
+                            String korperPflegeOrt,
+                          ) {
+                            return DropdownMenuItem(
+                              value: korperPflegeOrt,
+                              child: Text(korperPflegeOrt),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              mundPflegeOrtController.text = value.toString();
+                              unterlagen['MundpflegeOrt'] = '$value\n';
+                            });
+                          },
+                          value: mundPflegeOrtController.text.isEmpty
+                              ? null
+                              : mundPflegeOrtController.text,
+                          hint: Text('Mundpflege Wo?'),
+                          isExpanded: true,
                         ),
                       ),
                     ),
@@ -126,6 +201,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Zahnprothese
               children: [
                 Column(
                   children: [
@@ -143,11 +219,28 @@ class FifthWindow extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'Zahnprothese',
-                          mobilitaetOptions,
+                        width: 200,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButton(
+                            items: mobilitaetOptions.map((String mobilitaet) {
+                              return DropdownMenuItem(
+                                value: mobilitaet,
+                                child: Text(mobilitaet),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                zahnProteseController.text = value.toString();
+                                unterlagen['Zahnprothese'] = '$value\n';
+                              });
+                            },
+                            value: zahnProteseController.text.isEmpty
+                                ? null
+                                : zahnProteseController.text,
+                            hint: Text('Zahnprothese'),
+                            isExpanded: true,
+                          ),
                         ),
                       ),
                     ),
@@ -156,6 +249,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Rasieren
               children: [
                 Column(
                   children: [
@@ -170,11 +264,28 @@ class FifthWindow extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'Rasieren',
-                          mobilitaetOptions,
+                        width: 200,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButton(
+                            items: mobilitaetOptions.map((String mobilitaet) {
+                              return DropdownMenuItem(
+                                value: mobilitaet,
+                                child: Text(mobilitaet),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                rasierenController.text = value.toString();
+                                unterlagen['Rasieren'] = '$value\n';
+                              });
+                            },
+                            value: rasierenController.text.isEmpty
+                                ? null
+                                : rasierenController.text,
+                            hint: Text('Rasieren'),
+                            isExpanded: true,
+                          ),
                         ),
                       ),
                     ),
@@ -182,14 +293,30 @@ class FifthWindow extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'Rasieren',
-                          korperPflegeOrt,
+                    SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          items: korperPflegeOrtOption.map((
+                            String korperPflegeOrt,
+                          ) {
+                            return DropdownMenuItem(
+                              value: korperPflegeOrt,
+                              child: Text(korperPflegeOrt),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              rasierenOrtController.text = value.toString();
+                              unterlagen['RasierenOrt'] = '$value\n';
+                            });
+                          },
+                          value: rasierenOrtController.text.isEmpty
+                              ? null
+                              : rasierenOrtController.text,
+                          hint: Text('Rasieren Wo?'),
+                          isExpanded: true,
                         ),
                       ),
                     ),
@@ -198,6 +325,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //An- / Auskleiden
               children: [
                 Column(
                   children: [
@@ -215,11 +343,28 @@ class FifthWindow extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'An- / Auskleiden',
-                          mobilitaetOptions,
+                        width: 200,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButton(
+                            items: mobilitaetOptions.map((String mobilitaet) {
+                              return DropdownMenuItem(
+                                value: mobilitaet,
+                                child: Text(mobilitaet),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                anausKleidenController.text = value.toString();
+                                unterlagen['An- / Auskleiden'] = '$value\n';
+                              });
+                            },
+                            value: anausKleidenController.text.isEmpty
+                                ? null
+                                : anausKleidenController.text,
+                            hint: Text('An- / Auskleiden'),
+                            isExpanded: true,
+                          ),
                         ),
                       ),
                     ),
@@ -227,14 +372,30 @@ class FifthWindow extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: SizedBox(
-                        width: 170,
-                        child: buildDropDown(
-                          context,
-                          'An- / Auskleiden',
-                          korperPflegeOrt,
+                    SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          items: korperPflegeOrtOption.map((
+                            String korperPflegeOrt,
+                          ) {
+                            return DropdownMenuItem(
+                              value: korperPflegeOrt,
+                              child: Text(korperPflegeOrt),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              anausKleidenOrtController.text = value.toString();
+                              unterlagen['An-/Auskleiden'] = '$value\n';
+                            });
+                          },
+                          value: anausKleidenOrtController.text.isEmpty
+                              ? null
+                              : anausKleidenOrtController.text,
+                          hint: Text('An- / Auskleiden Wo?'),
+                          isExpanded: true,
                         ),
                       ),
                     ),
@@ -244,6 +405,7 @@ class FifthWindow extends StatelessWidget {
             ),
             Divider(color: Colors.grey, thickness: 1),
             Row(
+              //Ernährung
               children: [
                 Padding(
                   padding: const EdgeInsets.all(5.0),
@@ -255,6 +417,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Kostform
               children: [
                 Column(
                   children: [
@@ -268,13 +431,21 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 400,
-                      child: loadText(
-                        Key('Kostform'),
-                        'Kostform',
-                        'Kostform',
-                        TextEditingController(),
-                        TextInputType.text,
-                        Icon(Icons.restaurant_menu),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextField(
+                          key: Key('Kostform'),
+                          controller: kostformController,
+                          decoration: InputDecoration(
+                            labelText: 'Kostform:',
+                            hintText: 'Kostform: z.B. püriert, flüssig',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.restaurant_menu),
+                          ),
+                          onChanged: (value) {
+                            unterlagen['Kostform'] = '$value\n';
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -282,6 +453,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Schluckstörung
               children: [
                 Column(
                   children: [
@@ -301,13 +473,65 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: TwoSegmentedButtonChoice(),
+                      child: SizedBox(
+                        width: 200,
+                        child: SegmentedButton<TwoWahlOptions>(
+                          key: Key('Schluckstoerung'),
+                          style: SegmentedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                            foregroundColor: Colors.black,
+                            selectedForegroundColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                            selectedBackgroundColor: Colors.green,
+                            side: BorderSide(
+                              color: Color.fromARGB(255, 37, 34, 125),
+                            ),
+                            textStyle: TextStyle(
+                              color: Color.fromARGB(255, 0, 1, 2),
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+
+                          segments: const <ButtonSegment<TwoWahlOptions>>[
+                            ButtonSegment<TwoWahlOptions>(
+                              value: TwoWahlOptions.ja,
+                              label: Text('ja'),
+                              icon: Icon(Icons.check),
+                            ),
+                            ButtonSegment<TwoWahlOptions>(
+                              value: TwoWahlOptions.nein,
+                              label: Text('nein'),
+                              icon: Icon(Icons.cancel),
+                            ),
+                          ],
+                          selected: <TwoWahlOptions>{optionsSchluckstoerung},
+                          onSelectionChanged:
+                              (Set<TwoWahlOptions> newSelection) {
+                                setState(() {
+                                  optionsSchluckstoerung = newSelection.first;
+                                  unterlagen['Schluckstoerung'] =
+                                      '$optionsSchluckstoerung\n';
+                                });
+                              },
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
             Row(
+              //Hilfstellung Essen
               children: [
                 Column(
                   children: [
@@ -324,10 +548,27 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 300,
-                      child: buildDropDown(
-                        context,
-                        'Hilfstellung',
-                        essenOptions,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          items: essenOptions.map((String essen) {
+                            return DropdownMenuItem(
+                              value: essen,
+                              child: Text(essen),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              essenController.text = value.toString();
+                              unterlagen['Hilfstellung'] = '$value\n';
+                            });
+                          },
+                          value: essenController.text.isEmpty
+                              ? null
+                              : essenController.text,
+                          hint: Text('Essen'),
+                          isExpanded: true,
+                        ),
                       ),
                     ),
                   ],
@@ -335,6 +576,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Trinkverhalten
               children: [
                 Column(
                   children: [
@@ -351,10 +593,27 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 300,
-                      child: buildDropDown(
-                        context,
-                        'Trinkverhalten',
-                        trinkenOptions,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          items: trinkenOptions.map((String trinken) {
+                            return DropdownMenuItem(
+                              value: trinken,
+                              child: Text(trinken),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              trinkenController.text = value.toString();
+                              unterlagen['TrinkenVerhalten'] = '$value\n';
+                            });
+                          },
+                          value: trinkenController.text.isEmpty
+                              ? null
+                              : trinkenController.text,
+                          hint: Text('Trinkenverhalten'),
+                          isExpanded: true,
+                        ),
                       ),
                     ),
                   ],
@@ -362,6 +621,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Trinkverhalten Details
               children: [
                 Column(
                   children: [
@@ -378,13 +638,21 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 400,
-                      child: loadText(
-                        Key('andickenMit'),
-                        'andicken mit:',
-                        'andicken mit:',
-                        TextEditingController(),
-                        TextInputType.text,
-                        Icon(Icons.no_drinks),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextField(
+                          key: Key('AndickenMit'),
+                          controller: andickenMitController,
+                          decoration: InputDecoration(
+                            labelText: 'Andicken mit:',
+                            hintText: 'Andicken mit: z.B. Stärke, Pudding',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.local_drink),
+                          ),
+                          onChanged: (value) {
+                            unterlagen['AndickenMit'] = '$value\n';
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -392,6 +660,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Tägliche Trinkmenge
               children: [
                 Column(
                   children: [
@@ -408,13 +677,21 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 400,
-                      child: loadText(
-                        Key('TäglicheTrinkmenge'),
-                        'Tägliche Trinkmenge',
-                        'Tägliche Trinkmenge in ml',
-                        TextEditingController(),
-                        TextInputType.text,
-                        Icon(Icons.liquor),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextField(
+                          key: Key('TaeglicheTrinkmenge'),
+                          controller: taeglicheTrinkmengeController,
+                          decoration: InputDecoration(
+                            labelText: 'Tägliche Trinkmenge:',
+                            hintText: 'Tägliche Trinkmenge in ml',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.water_drop),
+                          ),
+                          onChanged: (value) {
+                            unterlagen['TaeglicheTrinkmenge'] = '$value\n';
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -423,6 +700,7 @@ class FifthWindow extends StatelessWidget {
             ),
             Divider(color: Colors.grey, thickness: 1),
             Row(
+              //Sondenkost
               children: [
                 Column(
                   children: [
@@ -442,13 +720,64 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: TwoSegmentedButtonChoice(),
+                      child: SizedBox(
+                        width: 200,
+                        child: SegmentedButton<TwoWahlOptions>(
+                          key: Key('Sondenkost'),
+                          style: SegmentedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                            foregroundColor: Colors.black,
+                            selectedForegroundColor: const Color.fromARGB(
+                              255,
+                              255,
+                              255,
+                              255,
+                            ),
+                            selectedBackgroundColor: Colors.green,
+                            side: BorderSide(
+                              color: Color.fromARGB(255, 37, 34, 125),
+                            ),
+                            textStyle: TextStyle(
+                              color: Color.fromARGB(255, 0, 1, 2),
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+
+                          segments: const <ButtonSegment<TwoWahlOptions>>[
+                            ButtonSegment<TwoWahlOptions>(
+                              value: TwoWahlOptions.ja,
+                              label: Text('ja'),
+                              icon: Icon(Icons.check),
+                            ),
+                            ButtonSegment<TwoWahlOptions>(
+                              value: TwoWahlOptions.nein,
+                              label: Text('nein'),
+                              icon: Icon(Icons.cancel),
+                            ),
+                          ],
+                          selected: <TwoWahlOptions>{optionsSondenkost},
+                          onSelectionChanged:
+                              (Set<TwoWahlOptions> newSelection) {
+                                setState(() {
+                                  optionsSondenkost = newSelection.first;
+                                  unterlagen['Sondenkost'] = '$newSelection\n';
+                                });
+                              },
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
             Row(
+              //Sondenart
               children: [
                 Column(
                   children: [
@@ -465,13 +794,35 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 300,
-                      child: buildDropDown(context, 'SondenArt', sondenArt),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: DropdownButton(
+                          items: sondenArt.map((String sondenArt) {
+                            return DropdownMenuItem(
+                              value: sondenArt,
+                              child: Text(sondenArt),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              sondenArtController.text = value.toString();
+                              unterlagen['SondenArt'] = '$value\n';
+                            });
+                          },
+                          value: sondenArtController.text.isEmpty
+                              ? null
+                              : sondenArtController.text,
+                          hint: Text('Sondenart'),
+                          isExpanded: true,
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ],
             ),
             Row(
+              //Sondengelegt am
               children: [
                 Column(
                   children: [
@@ -485,13 +836,22 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 400,
-                      child: loadText(
-                        Key('SondengelegtAm'),
-                        'gelegt am',
-                        'Datum der Anlage (TT.MM.JJJJ)',
-                        TextEditingController(),
-                        TextInputType.number,
-                        Icon(Icons.calendar_today),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextField(
+                          key: Key('SondengelegtAm'),
+                          controller: sondengelegtAmController,
+                          decoration: InputDecoration(
+                            labelText: 'gelegt am:',
+                            hintText: 'Datum der Anlage (TT.MM.JJJJ)',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.calendar_month),
+                          ),
+                          inputFormatters: [dateFormatter],
+                          onChanged: (value) {
+                            unterlagen['SondengelegtAm'] = '$value\n';
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -499,6 +859,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Letzter Verbandwechsel
               children: [
                 Column(
                   children: [
@@ -515,13 +876,22 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 400,
-                      child: loadText(
-                        Key('LetzterVerbandwechsel'),
-                        'Letzter Vw',
-                        'Letzter Verbandwechsel (TT.MM.JJJJ)',
-                        TextEditingController(),
-                        TextInputType.number,
-                        Icon(Icons.calendar_today),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextField(
+                          key: Key('LetzterVerbandwechsel'),
+                          controller: letzterVerbandwechselController,
+                          decoration: InputDecoration(
+                            labelText: 'Letzter Verbandwechsel:',
+                            hintText: 'Letzter Verbandwechsel (TT.MM.JJJJ)',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.calendar_month),
+                          ),
+                          inputFormatters: [dateFormatter],
+                          onChanged: (value) {
+                            unterlagen['LetzterVerbandwechsel'] = '$value\n';
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -529,6 +899,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Mengenangaben Sondenkost
               children: [
                 Column(
                   children: [
@@ -545,13 +916,21 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 400,
-                      child: loadText(
-                        Key('MengeDerSondenkost'),
-                        'Menge der Sondenkost',
-                        'Menge der Sondenkost in ml',
-                        TextEditingController(),
-                        TextInputType.number,
-                        Icon(Icons.bloodtype),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextField(
+                          key: Key('MengeDerSondenkost'),
+                          controller: mengeDerSondenkostController,
+                          decoration: InputDecoration(
+                            labelText: 'Menge der Sondenkost in ml:',
+                            hintText: 'Menge der Sondenkost in ml',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.local_drink),
+                          ),
+                          onChanged: (value) {
+                            unterlagen['MengeDerSondenkost'] = '$value\n';
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -559,6 +938,7 @@ class FifthWindow extends StatelessWidget {
               ],
             ),
             Row(
+              //Mengenangaben Tee/Wasser
               children: [
                 Column(
                   children: [
@@ -575,13 +955,21 @@ class FifthWindow extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 400,
-                      child: loadText(
-                        Key('MengeDerTeeWasser'),
-                        'Menge der Tee/Wasser',
-                        'Menge der Tee/Wasser in ml',
-                        TextEditingController(),
-                        TextInputType.number,
-                        Icon(Icons.water_drop),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: TextField(
+                          key: Key('MengeDerTeeWasser'),
+                          controller: mengeDerTeeWasserController,
+                          decoration: InputDecoration(
+                            labelText: 'Menge der Tee/Wasser in ml:',
+                            hintText: 'Menge der Tee/Wasser in ml',
+                            border: OutlineInputBorder(),
+                            prefixIcon: Icon(Icons.local_drink),
+                          ),
+                          onChanged: (value) {
+                            unterlagen['MengeDerTeeWasser'] = '$value\n';
+                          },
+                        ),
                       ),
                     ),
                   ],

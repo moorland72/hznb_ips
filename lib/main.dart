@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hznb_ips/data/initdatabasesql3.dart';
+import 'package:hznb_ips/screens/hauptwindow.dart';
 import 'package:hznb_ips/screens/window2.dart';
 import 'package:hznb_ips/screens/window3.dart';
 import 'package:hznb_ips/screens/window4.dart';
 import 'package:hznb_ips/screens/window5.dart';
 import 'package:hznb_ips/screens/window6.dart';
 import 'package:hznb_ips/screens/window7.dart';
-import 'screens/main_window.dart';
+import 'screens/window1.dart';
 
-void main() {
+void main() async {
+   WidgetsFlutterBinding.ensureInitialized();
+   await initDatabase();
   runApp(MainApp());
 }
 
@@ -33,6 +37,10 @@ class MainApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => SixthWindow());
           case '/seventh':
             return MaterialPageRoute(builder: (context) => SeventhWindow());
+          case '/hauptRail':
+            return MaterialPageRoute(
+              builder: (context) => NavigationRailWindow(),
+            );
           default:
             return MaterialPageRoute(builder: (context) => MainWindow());
         }
@@ -42,7 +50,7 @@ class MainApp extends StatelessWidget {
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      home: MainWindow(),
+      home: NavigationRailWindow(),
     );
   }
 }
